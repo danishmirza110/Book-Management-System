@@ -1,0 +1,322 @@
+/* ═══════════════════════════════════════════════════
+   BookShelf — Custom Styles
+   Layered on top of Bootstrap 5
+═══════════════════════════════════════════════════ */
+
+/* ── Google Fonts ─────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ── CSS Variables ────────────────────────────── */
+:root {
+  --primary: #0f3460;
+  --accent:  #e5a00d;
+  --danger:  #dc3545;
+  --bg:      #f5f6fa;
+  --card-radius: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-hover: 0 8px 28px rgba(0,0,0,0.14);
+}
+
+/* ── Base ─────────────────────────────────────── */
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: #1a1a2e;
+  min-height: 100vh;
+}
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Navbar ───────────────────────────────────── */
+.navbar-brand span:first-child {
+  font-family: 'Playfair Display', serif;
+}
+
+/* ── Search / Filter Bar ──────────────────────── */
+.search-filter-bar {
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+  position: sticky;
+  top: 56px;
+  z-index: 100;
+}
+
+.search-filter-bar .input-group,
+.search-filter-bar .form-control,
+.search-filter-bar .form-select {
+  height: 42px;
+}
+
+.search-filter-bar .input-group {
+  border: 1.5px solid #dee2e6;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.search-filter-bar .input-group:focus-within {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79,70,229,.1);
+}
+
+.search-filter-bar .form-select {
+  border: 1.5px solid #dee2e6;
+  border-radius: 10px !important;
+  transition: border-color .2s;
+}
+.search-filter-bar .form-select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79,70,229,.1);
+}
+
+/* ── Add Button ───────────────────────────────── */
+.btn-add {
+  background: linear-gradient(135deg, #0f3460 0%, #1a237e 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 9px 18px;
+  transition: all .2s;
+}
+.btn-add:hover {
+  background: linear-gradient(135deg, #16213e 0%, #283593 100%);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(15,52,96,.35);
+}
+.btn-add:active {
+  transform: translateY(0);
+}
+
+/* ── Book Card ────────────────────────────────── */
+.book-card {
+  border-radius: var(--card-radius) !important;
+  transition: transform .22s ease, box-shadow .22s ease;
+  overflow: hidden;
+  cursor: default;
+}
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover) !important;
+}
+
+/* Cover section */
+.book-cover {
+  height: 110px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.cover-initial {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  z-index: 2;
+  line-height: 1;
+}
+.cover-lines {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1;
+}
+.cover-lines div {
+  height: 2px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 2px;
+}
+.cover-lines div:first-child  { width: 70% }
+.cover-lines div:nth-child(2) { width: 50% }
+.cover-lines div:last-child   { width: 35% }
+
+/* Genre badge */
+.genre-badge {
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Action buttons */
+.book-card .btn-outline-primary {
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 0;
+  transition: all .18s;
+}
+.book-card .btn-outline-danger {
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 0;
+  transition: all .18s;
+}
+
+/* ── Skeleton loading ─────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #e9ecef 25%, #f8f9fa 50%, #e9ecef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 4px;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0 }
+  100% { background-position: -200% 0 }
+}
+
+/* ── Empty State ──────────────────────────────── */
+.empty-state {
+  max-width: 300px;
+}
+.empty-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(15,52,96,.08), rgba(229,160,13,.1));
+  border: 2px dashed rgba(15,52,96,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.empty-icon i {
+  font-size: 1.8rem;
+  color: #6c757d;
+}
+
+/* ── Modal ────────────────────────────────────── */
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 30, 0.55);
+  backdrop-filter: blur(3px);
+  z-index: 1040;
+  animation: fadeIn .15s ease;
+}
+.modal-custom {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: slideUp .2s ease;
+}
+.modal-custom-dialog {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+.modal-custom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 16px;
+  border-bottom: 1px solid #f1f3f5;
+}
+.modal-custom-body {
+  padding: 20px;
+}
+.modal-custom-footer {
+  padding: 14px 20px 18px;
+  border-top: 1px solid #f1f3f5;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.modal-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: rgba(15,52,96,0.1);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+.btn-close-custom {
+  background: #f8f9fa;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn-close-custom:hover {
+  background: #e9ecef;
+  color: #343a40;
+}
+
+/* Form controls inside modal */
+.modal-custom-body .form-control,
+.modal-custom-body .form-select {
+  border-radius: 9px;
+  border: 1.5px solid #dee2e6;
+  padding: 9px 13px;
+  font-size: 0.9rem;
+  transition: border-color .18s, box-shadow .18s;
+}
+.modal-custom-body .form-control:focus,
+.modal-custom-body .form-select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79,70,229,.12);
+}
+
+/* ── Toast ────────────────────────────────────── */
+.toast-custom {
+  background: white;
+  border-radius: 12px;
+  padding: 12px 18px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  min-width: 240px;
+  animation: slideUp .2s ease;
+}
+.toast-success { border-left: 4px solid #198754; color: #0a3622; }
+.toast-success i { color: #198754; }
+.toast-danger  { border-left: 4px solid #dc3545; color: #58151c; }
+.toast-danger i  { color: #dc3545; }
+
+/* ── Animations ───────────────────────────────── */
+@keyframes fadeIn  { from { opacity: 0 } to { opacity: 1 } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: translateY(0) } }
+
+/* ── Footer ───────────────────────────────────── */
+.app-footer {
+  margin-top: auto;
+  border-top: 1px solid #e9ecef;
+}
+
+/* ── Responsive tweaks ────────────────────────── */
+@media (max-width: 576px) {
+  .search-filter-bar { top: 52px }
+  .book-cover { height: 90px }
+  .cover-initial { font-size: 2.2rem }
+}
